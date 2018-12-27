@@ -10,6 +10,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>study-elasticsearch</module>
+        <module>study-jsoup</module>
+        <module>javascript-runner-demo</module>
+        <module>test</module>
+        <module>study-leet-code</module>
     </modules>
 
 
