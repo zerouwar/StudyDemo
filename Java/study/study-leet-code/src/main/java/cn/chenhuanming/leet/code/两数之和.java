@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * https://leetcode-cn.com/problems/two-sum/
@@ -24,10 +26,29 @@ import java.util.Deque;
  */
 public class 两数之和 {
 
-    private static final Object LOCK = new Object();
-
     public static void main(String[] args) throws URISyntaxException {
-        System.out.println(new URI("http://www.baidu\\s.dianping.com").getHost());
+
+    }
+
+    /**
+     * 用hash表记录target-当前值在nums的位置，这样只需要O(nums.length)
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] twoSum(int[] nums, int target) {
+        Map<Integer,Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int remain = target-nums[i];
+
+            if(map.get(remain)!=null){
+                return new int[]{i,map.get(remain)};
+            }
+
+            map.put(nums[i],i);
+        }
+        throw new IllegalArgumentException("no solution");
     }
 
 }

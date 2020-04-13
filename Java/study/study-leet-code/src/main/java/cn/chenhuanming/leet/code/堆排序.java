@@ -1,8 +1,6 @@
 package cn.chenhuanming.leet.code;
 
 import java.util.Arrays;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * @author chenhuanming
@@ -10,10 +8,20 @@ import java.util.stream.Stream;
  */
 public class 堆排序 {
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 2, 3, 4, 5, 6, 7};
-        heapsort(arr);
+        int[] arr = new int[]{3,2,4,1,5,6,7};
+
+        heapSort(arr);
 
         Arrays.stream(arr).forEach(System.out::println);
+    }
+
+    static void heapSort(int[] arr){
+        int[] heap = buildMaxHeap(arr);
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = heap[1];
+            Utils.exchange(heap,heap[0]--,1);
+            keepMaxHeapify(heap,1);
+        }
     }
 
     /**
@@ -21,10 +29,17 @@ public class 堆排序 {
      *
      * @param arr
      */
-    static void heapsort(int[] arr) {
-        for (int i = arr.length / 2; i >= 0; i--) {
-            keepMaxHeapify(arr, i);
+    static int[] buildMaxHeap(int[] arr) {
+        int[] heap = new int[arr.length+1];
+        for (int i = 1; i < heap.length; i++) {
+            heap[i] = arr[i-1];
         }
+
+        heap[0] = arr.length;
+        for (int i = arr.length / 2; i >= 1; i--) {
+            keepMaxHeapify(heap, i);
+        }
+        return heap;
     }
 
     /**
@@ -33,26 +48,26 @@ public class 堆排序 {
      * 再把结果递推到树的下面
      * 时间复杂度：o(h),h=lgn
      *
-     * @param arr
+     * @param heap
      * @param i
      */
-    static void keepMaxHeapify(int[] arr, int i) {
+    static void keepMaxHeapify(int[] heap, int i) {
         int left = i << 1;//aka i*2
         int right = left + 1;
 
         int largest = i;
 
-        if (left < arr.length && arr[left] > arr[largest]) {
+        if (left <= heap[0] && heap[left] > heap[largest]) {
             largest = left;
         }
 
-        if (right < arr.length && arr[right] > arr[largest]) {
+        if (right <= heap[0] && heap[right] > heap[largest]) {
             largest = right;
         }
 
         if (largest != i) {
-            Utils.exchange(arr, i, largest);
-            keepMaxHeapify(arr, largest);
+            Utils.exchange(heap, i, largest);
+            keepMaxHeapify(heap, largest);
         }
     }
 }

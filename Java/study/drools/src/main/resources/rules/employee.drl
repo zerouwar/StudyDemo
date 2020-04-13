@@ -1,0 +1,25 @@
+package employee
+
+import cn.chenhuanming.study.drools.employee.Employee
+
+global cn.chenhuanming.study.drools.employee.EmployeeManage employeeManage
+
+rule "old man"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $s:Employee(age>=35)
+    then
+        employeeManage.handleOldMan($s);
+    end
+
+rule "lady"
+    no-loop true
+    lock-on-active true
+    salience 1
+    when
+        $s:Employee(sex==0)
+    then
+        employeeManage.handleLady($s);
+    end

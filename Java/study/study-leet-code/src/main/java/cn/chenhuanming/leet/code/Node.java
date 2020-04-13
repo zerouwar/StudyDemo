@@ -9,19 +9,23 @@ public class Node {
     public Node left;
     public Node right;
 
+    public static final Node NIL = new Node();
+
     /**
      * 根据前序序列和中序序列构建二叉树
      * 依据前序序列中的节点a，在中序序列中a左边都是a的左子树节点，右边都是a的右子树节点
+     *
      * @param preOrder
      * @param inOrder
      * @return
      */
     public static Node createTree(int[] preOrder, int[] inOrder) {
-        return createTree(preOrder,0,inOrder,0,inOrder.length-1);
+        return createTree(preOrder, 0, inOrder, 0, inOrder.length - 1);
     }
 
     /**
      * 根据前序序列和中序序列构建一个Node节点
+     *
      * @param preOrder
      * @param preIndex
      * @param inOrder
@@ -38,12 +42,16 @@ public class Node {
         node.val = preOrder[preIndex];
 
         for (int i = left; i <= right; i++) {
-            if(preOrder[preIndex]==inOrder[i]){
-                node.left = createTree(preOrder,preIndex+1,inOrder,left,i-1);
-                node.right = createTree(preOrder,preIndex+(i-left+1),inOrder,i+1,right);
+            if (preOrder[preIndex] == inOrder[i]) {
+                node.left = createTree(preOrder, preIndex + 1, inOrder, left, i - 1);
+                node.right = createTree(preOrder, preIndex + (i - left + 1), inOrder, i + 1, right);
                 break;
             }
         }
         return node;
+    }
+
+    public boolean isLeaf() {
+        return left == null && right == null;
     }
 }
