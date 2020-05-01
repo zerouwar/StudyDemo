@@ -1,5 +1,7 @@
 package cn.chenhuanming.leet.code;
 
+import cn.chenhuanming.leet.code.common.Node;
+
 /**
  * @author chenhuanming
  * Created at 2018/12/26

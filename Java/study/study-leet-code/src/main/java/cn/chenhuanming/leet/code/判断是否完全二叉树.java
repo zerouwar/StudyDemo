@@ -1,6 +1,7 @@
 package cn.chenhuanming.leet.code;
 
-import java.util.ArrayDeque;
+import cn.chenhuanming.leet.code.common.Node;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

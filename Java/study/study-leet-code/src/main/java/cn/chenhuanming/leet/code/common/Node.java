@@ -1,4 +1,4 @@
-package cn.chenhuanming.leet.code;
+package cn.chenhuanming.leet.code.common;
 
 /**
  * @author chenhuanming
