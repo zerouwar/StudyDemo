@@ -4,12 +4,12 @@ package cn.chenhuanming.leet.code.common;
  * @author chenhuanming
  * Created at 2018/12/26
  */
-public class Node {
+public class TreeNode {
     public int val;
-    public Node left;
-    public Node right;
+    public TreeNode left;
+    public TreeNode right;
 
-    public static final Node NIL = new Node();
+    public static final TreeNode NIL = new TreeNode();
 
     /**
      * 根据前序序列和中序序列构建二叉树
@@ -19,7 +19,7 @@ public class Node {
      * @param inOrder
      * @return
      */
-    public static Node createTree(int[] preOrder, int[] inOrder) {
+    public static TreeNode createTree(int[] preOrder, int[] inOrder) {
         return createTree(preOrder, 0, inOrder, 0, inOrder.length - 1);
     }
 
@@ -33,22 +33,22 @@ public class Node {
      * @param right
      * @return
      */
-    private static Node createTree(int[] preOrder, int preIndex, int[] inOrder, int left, int right) {
+    private static TreeNode createTree(int[] preOrder, int preIndex, int[] inOrder, int left, int right) {
         if (left > right || preIndex >= preOrder.length) {
             return null;
         }
 
-        Node node = new Node();
-        node.val = preOrder[preIndex];
+        TreeNode treeNode = new TreeNode();
+        treeNode.val = preOrder[preIndex];
 
         for (int i = left; i <= right; i++) {
             if (preOrder[preIndex] == inOrder[i]) {
-                node.left = createTree(preOrder, preIndex + 1, inOrder, left, i - 1);
-                node.right = createTree(preOrder, preIndex + (i - left + 1), inOrder, i + 1, right);
+                treeNode.left = createTree(preOrder, preIndex + 1, inOrder, left, i - 1);
+                treeNode.right = createTree(preOrder, preIndex + (i - left + 1), inOrder, i + 1, right);
                 break;
             }
         }
-        return node;
+        return treeNode;
     }
 
     public boolean isLeaf() {

@@ -1,6 +1,6 @@
 package cn.chenhuanming.leet.code;
 
-import cn.chenhuanming.leet.code.common.Node;
+import cn.chenhuanming.leet.code.common.TreeNode;
 
 /**
  * @author chenhuanming
@@ -8,22 +8,22 @@ import cn.chenhuanming.leet.code.common.Node;
  */
 public class 遍历二叉树 {
     public static void main(String[] args) {
-        Node root = Node.createTree(new int[]{1,2,4,7,3,5,6,8},new int[]{4,7,2,1,5,3,8,6});
+        TreeNode root = TreeNode.createTree(new int[]{1,2,4,7,3,5,6,8},new int[]{4,7,2,1,5,3,8,6});
 
         preOrderTraversal(root);
     }
 
     /**
      * 前序遍历，上->左->右
-     * @param node
+     * @param treeNode
      */
-    static void preOrderTraversal(Node node){
-        System.out.print(node.val+" ");
-        if(node.left!=null){
-            preOrderTraversal(node.left);
+    static void preOrderTraversal(TreeNode treeNode){
+        System.out.print(treeNode.val+" ");
+        if(treeNode.left!=null){
+            preOrderTraversal(treeNode.left);
         }
-        if(node.right!=null){
-            preOrderTraversal(node.right);
+        if(treeNode.right!=null){
+            preOrderTraversal(treeNode.right);
         }
     }
 
