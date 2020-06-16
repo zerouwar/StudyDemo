@@ -1,4 +1,4 @@
-package cn.chenhuanming.leet.code;
+package cn.chenhuanming.leet.code.sort;
 
 import cn.chenhuanming.leet.code.common.Utils;
 
@@ -19,25 +19,24 @@ public class 快速排序 {
         quickSort(arr,0,arr.length-1);
     }
 
-    static void quickSort(int[] arr,int left,int right){
-        if(left<right){
-            int mid = partition(arr,left,right);
-            quickSort(arr,left,mid-1);
-            quickSort(arr,mid+1,right);
+    private static void quickSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int mid = partition(arr, left, right);
+            quickSort(arr, left, mid - 1);
+            quickSort(arr, mid + 1, right);
         }
     }
 
-    static int partition(int[] arr,int left,int right){
-        int t = arr[right];
-
+    private static int partition(int[] arr, int left, int right) {
         int i = left;
-
         for (int j = i; j < right; j++) {
-            if(arr[j]<t){
-                Utils.exchange(arr,i++,j);
+            if (arr[j] < arr[right]) {
+                Utils.exchange(arr, i++, j);
             }
         }
-        Utils.exchange(arr,i,right);
+        Utils.exchange(arr, i, right);
         return i;
     }
+
+
 }

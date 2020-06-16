@@ -1,4 +1,4 @@
-package cn.chenhuanming.leet.code;
+package cn.chenhuanming.leet.code.sort;
 
 import cn.chenhuanming.leet.code.common.Utils;
 
