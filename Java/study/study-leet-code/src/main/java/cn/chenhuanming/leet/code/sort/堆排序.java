@@ -18,58 +18,31 @@ public class 堆排序 {
     }
 
     static void heapSort(int[] arr){
-        int[] heap = buildMaxHeap(arr);
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = heap[1];
-            Utils.exchange(heap,heap[0]--,1);
-            keepMaxHeapify(heap,1);
+        //建立最大堆
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
+            keep(arr, i, arr.length);
+        }
+        int max = arr.length;
+        for (int i = arr.length - 1; i > 0; i--) {
+            Utils.exchange(arr, i, 0);
+            keep(arr, 0, --max);
         }
     }
 
-    /**
-     * 自底向上，从非叶子节点开始维护堆性质
-     *
-     * @param arr
-     */
-    static int[] buildMaxHeap(int[] arr) {
-        int[] heap = new int[arr.length+1];
-        for (int i = 1; i < heap.length; i++) {
-            heap[i] = arr[i-1];
-        }
-
-        heap[0] = arr.length;
-        for (int i = arr.length / 2; i >= 1; i--) {
-            keepMaxHeapify(heap, i);
-        }
-        return heap;
-    }
-
-    /**
-     * 维护最大堆性质
-     * 比较节点和它的孩子节点，值最大的成为父节点
-     * 再把结果递推到树的下面
-     * 时间复杂度：o(h),h=lgn
-     *
-     * @param heap
-     * @param i
-     */
-    static void keepMaxHeapify(int[] heap, int i) {
-        int left = i << 1;//aka i*2
-        int right = left + 1;
-
+    static void keep(int[] arr, int i, int max) {
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
         int largest = i;
 
-        if (left <= heap[0] && heap[left] > heap[largest]) {
+        if (left < max && arr[left] > arr[largest]) {
             largest = left;
         }
-
-        if (right <= heap[0] && heap[right] > heap[largest]) {
+        if (right < max && arr[right] > arr[largest]) {
             largest = right;
         }
-
-        if (largest != i) {
-            Utils.exchange(heap, i, largest);
-            keepMaxHeapify(heap, largest);
+        if (i != largest) {
+            Utils.exchange(arr, i, largest);
+            keep(arr, largest, max);
         }
     }
 }

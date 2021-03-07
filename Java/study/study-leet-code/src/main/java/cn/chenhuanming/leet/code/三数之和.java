@@ -1,6 +1,8 @@
 package cn.chenhuanming.leet.code;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
@@ -26,24 +28,32 @@ public class 三数之和 {
     }
 
     public List<List<Integer>> threeSum(int[] nums) {
-        int[][] table = new int[nums.length][nums.length];
-        Map<Integer, Integer> map = new HashMap<>();
-
         List<List<Integer>> result = new ArrayList<>();
 
-        for (int i = 0; i < nums.length; i++) {
-            map.put(nums[i], i);
-            for (int j = i + 1; j < nums.length; j++) {
-                table[i][j] = nums[i] + nums[j];
+        Arrays.sort(nums);
 
-                int target = -table[i][j];
-                Integer index = map.get(target);
-                if (index != null && index != i && index != j) {
-                    result.add(Arrays.asList(nums[i], nums[j], target));
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int right = nums.length - 1;
+            int target = -nums[i];
+
+            for (int j = i + 1; j < nums.length; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) {
+                    continue;
+                }
+                while (right > j && nums[j] + nums[right] > target) {
+                    right--;
+                }
+                if (right == j) {
+                    continue;
+                }
+                if (nums[j] + nums[right] == target) {
+                    result.add(Arrays.asList(nums[i], nums[j], nums[right]));
                 }
             }
         }
-
         return result;
     }
 }
